@@ -55,9 +55,9 @@ public class EvenementsBouton extends Application {
     //   //   labelCompteur.setText(compteur.getValeur() + " clics");
     //   // });
 
-    Button bouton = new Button("clique-moi");
-    bouton.setId("bouton-clique-moi");
     Compteur compteur = new Compteur();
+    Button bouton = new Button("Clique-moi");
+    bouton.setId("bouton-clique-moi");
     Label labelCompteur = new Label("0 clics");
     labelCompteur.setId("compteur");
 

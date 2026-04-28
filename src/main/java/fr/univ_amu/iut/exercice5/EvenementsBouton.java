@@ -67,7 +67,7 @@ public class EvenementsBouton extends Application {
           labelCompteur.setText(compteur.getValeur() + " clics");
         });
 
-    VBox vbox = new VBox(bouton, labelCompteur);
+    VBox vbox = new VBox(10, bouton, labelCompteur);
     Scene scene = new Scene(vbox);
     primaryStage.setScene(scene);
     primaryStage.show();

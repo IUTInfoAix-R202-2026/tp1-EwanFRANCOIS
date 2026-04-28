@@ -1,6 +1,15 @@
 package fr.univ_amu.iut.exercice4;
 
 import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuBar;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 /**
@@ -44,6 +53,28 @@ public class MiseEnPage extends Application {
     // Donne un id CSS utile sur les composants si tu veux les retrouver
     // facilement (les tests utilisent lookup sur les classes ".text-field"
     // et ".button", pas besoin d'id particulier).
+    BorderPane squelette = new BorderPane();
+    Scene scene = new Scene(squelette);
+    Menu Fichier = new Menu("Fichier");
+    Menu Aide = new Menu("Aide");
+    MenuBar menuBar = new MenuBar();
+    menuBar.getMenus().addAll(Fichier, Aide);
+
+    GridPane gp = new GridPane();
+    gp.add(new Label("Nom :"), 0, 0);
+    gp.add(new Label("Email :"), 0, 1);
+    gp.add(new TextField(), 1, 0);
+    gp.add(new TextField(), 1, 1);
+
+    HBox Hbox = new HBox();
+    Hbox.getChildren().addAll(new Button("Valider"), new Button("Annuler"));
+
+    squelette.setTop(menuBar);
+    squelette.setCenter(gp);
+    squelette.setBottom(Hbox);
+
+    primaryStage.setScene(scene);
+    primaryStage.show();
   }
 
   public static void main(String[] args) {

@@ -1,6 +1,12 @@
 package fr.univ_amu.iut.exercice6;
 
 import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 /**
@@ -35,6 +41,10 @@ import javafx.stage.Stage;
  */
 public class Palette extends Application {
 
+  private int compteurRouge;
+  private int compteurVert;
+  private int compteurBleu;
+
   @Override
   public void start(Stage primaryStage) {
     // TODO exercice 6 : implémenter la palette décrite dans la Javadoc.
@@ -42,24 +52,67 @@ public class Palette extends Application {
     // Stratégie conseillée :
     //
     // 1. Créer un BorderPane comme racine.
+    BorderPane squelette = new BorderPane();
+    Scene scene = new Scene(squelette);
+    Button bouton_rouge = new Button("Rouge");
+    Button bouton_vert = new Button("Vert");
+    Button bouton_bleu = new Button("Bleu");
+    bouton_rouge.setId("btn-rouge");
+    bouton_vert.setId("btn-vert");
+    bouton_bleu.setId("btn-bleu");
     //
     // 2. Top : un HBox avec trois boutons "Rouge", "Vert", "Bleu".
     //    Donne-leur les ids "btn-rouge", "btn-vert", "btn-bleu" - les tests
     //    les retrouvent via robot.lookup("#btn-rouge") etc.
+    HBox Hbox = new HBox(10, bouton_rouge, bouton_vert, bouton_bleu);
+    squelette.setTop(Hbox);
     //
     // 3. Center : un Pane avec l'id "zone", taille minimale 300×200.
     //    Change sa couleur via setStyle("-fx-background-color: red;") etc.
+    Pane zone = new Pane();
+    zone.setId("zone");
+    zone.setMinSize(300, 200);
+    squelette.setCenter(zone);
     //
     // 4. Bottom : un Label avec l'id "compteurs", texte initial
     //    "Rouge: 0  Vert: 0  Bleu: 0".
+    Label label = new Label("Rouge: 0  Vert: 0  Bleu: 0");
+    label.setId("compteurs");
+    squelette.setBottom(label);
     //
     // 5. Trois entiers compteur_rouge, compteur_vert, compteur_bleu
     //    (ou trois variables d'instance). Chaque clic incrémente le bon
     //    compteur et reformate le texte du label.
+
+    bouton_rouge.setOnAction(
+        e -> {
+          compteurRouge++;
+          zone.setStyle("-fx-background-color: red;");
+          label.setText(
+              "Rouge: " + compteurRouge + " Vert: " + compteurVert + " Bleu: " + compteurBleu);
+        });
+
+    bouton_vert.setOnAction(
+        e -> {
+          compteurVert++;
+          zone.setStyle("-fx-background-color: green;");
+          label.setText(
+              "Rouge: " + compteurRouge + " Vert: " + compteurVert + " Bleu: " + compteurBleu);
+        });
+
+    bouton_bleu.setOnAction(
+        e -> {
+          compteurBleu++;
+          zone.setStyle("-fx-background-color: blue;");
+          label.setText(
+              "Rouge: " + compteurRouge + " Vert: " + compteurVert + " Bleu: " + compteurBleu);
+        });
     //
     // 6. Attention au format du texte du label : les tests vérifient la
     //    présence exacte des substrings "Rouge: 2", "Vert: 0", "Bleu: 1"
     //    après une séquence de clics.
+    primaryStage.setScene(scene);
+    primaryStage.show();
   }
 
   public static void main(String[] args) {
